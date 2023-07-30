@@ -16,9 +16,11 @@ public class OrderCalculate : MonoBehaviour
     public int fruits_counter2 = 0;
     public int score;
     public TextMeshProUGUI scoreTMP;
+    public TMPScore tMPScore;
     public bool wrongFruits=false;
     public string stringValue;
     public ParticleController particleController;
+    public int score_;
 
     private void Awake()
     {
@@ -65,22 +67,27 @@ public class OrderCalculate : MonoBehaviour
     {
         if((wrongFruits) && (order.orderNumber==fruits_counter+fruits_counter2))
         {
-            score += fruits_counter2 * fruits_score.rottens_score[objMove.index];
-            score += fruits_counter * fruits_score.fruits_score[order.Random_Image_Num];
+            score_= fruits_counter2 * fruits_score.rottens_score[objMove.index] + fruits_counter * fruits_score.fruits_score[order.Random_Image_Num];
+            score += score_;
+            //score += score_;
             Debug.Log("fruits_score****1" + score);
+            tMPScore.ShowTMPText();
             ResultScore();
             particleController.ActivateParticle();
         }
         else if((wrongFruits==true) && (order.orderNumber<fruits_counter+fruits_counter2))
         {
-            score += order.orderNumber * fruits_score.fruits_score[order.Random_Image_Num];
+            score += score_;
             Debug.Log("fruits_score****2" + score);
+            tMPScore.ShowTMPText();
             ResultScore();
             particleController.ActivateParticle();
         }
         else
         {
             score -= 30;
+            score_ = 30;
+            tMPScore.ShowTMPText2 ();
             ResultScore();
         }
         
@@ -89,6 +96,7 @@ public class OrderCalculate : MonoBehaviour
     public void ResultScore()
     {
         scoreTMP.text = ("Score:" + score);
+        
         wrongFruits=false;
         fruits_counter2 = 0;
         fruits_counter = 0;

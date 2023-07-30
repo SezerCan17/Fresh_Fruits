@@ -43,7 +43,7 @@ public class ObjectsMoving : MonoBehaviour
         rottenApple.Rotten_FruitsControl(fruitName2);
         Debug.Log("rotten789:" + rottenApple.rotten);
         index=rottenApple.index;
-        if(rottenApple.rotten==true)
+        if(rottenApple.rotten)
         {
             rottenApple.Rotten_appleControl();
             orderCal.OrderCalculate2_(gameObject.name);

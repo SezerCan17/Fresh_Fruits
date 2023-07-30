@@ -13,6 +13,7 @@ public class Rotten_Apple : MonoBehaviour
     public Customer customer;
     public ObjectsMoving objMove;
     public Fruits fruits;
+    public TMPScore tMPScore;
     public bool rotten=false;
     public int index;
 
@@ -21,6 +22,10 @@ public class Rotten_Apple : MonoBehaviour
     {
         if(anim_controller.IdleController)
         {
+            orderCal.score_ = 30;
+            orderCal.score -= 30;
+            tMPScore.ShowTMPText2();
+            orderCal.ResultScore();
             Debug.Log("yakalandýnn");
             Vib_controller.VibrateDevice();
             objectMove.TorbaPos();
